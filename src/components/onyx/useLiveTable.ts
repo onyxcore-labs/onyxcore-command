@@ -10,7 +10,7 @@ export function useLiveTable<T extends keyof Tables>(table: T, order: string, as
   const [rows, setRows] = useState<Row<T>[]>([]);
   const load = useCallback(async () => {
     const { data } = await supabase.from(table).select("*").order(order, { ascending });
-    if (data) setRows(data as Row<T>[]);
+    if (data) setRows(data as unknown as Row<T>[]);
   }, [table, order, ascending]);
 
   useEffect(() => {
