@@ -8,3 +8,6 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- OnyxCore uses a surname passcode gate (client-side, localStorage) instead of real accounts; tables allow anon access via RLS `true` policies — why: spec asked for a lightweight founder gate, not logins.
+- Live data goes through `useLiveTable` (load + realtime refetch) — why: one consistent sync path for all modules.

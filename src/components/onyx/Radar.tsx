@@ -46,7 +46,7 @@ export function Radar() {
               <div className="mt-2 flex flex-wrap items-center gap-3 font-mono text-[11px]">
                 {r.source_url && <a href={r.source_url} target="_blank" rel="noreferrer" className="text-primary hover:underline">↗ {sourceLabel(r.source_url)}</a>}
                 <span className="text-muted-foreground">by {r.submitted_by}</span>
-                <button onClick={() => openChat(`Re: **${r.title}** — `)} className="text-gold hover:underline">💬 discuss in #all-hands</button>
+                <button onClick={() => openChat(`Re: **${r.title}** — `)} className="text-gold hover:underline">→ discuss in #all-hands</button>
               </div>
               <div className="mt-3 flex flex-wrap gap-1.5">
                 {VERDICTS.map((v) => (
