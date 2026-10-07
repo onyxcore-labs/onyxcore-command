@@ -29,7 +29,7 @@ export function SessionProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (!founder) return;
     const beat = () =>
-      supabase.from("founder_status").update({ is_online: true, last_active: new Date().toISOString() }).eq("handle", founder.handle);
+      supabase.from("founder_status").update({ is_online: true, last_active: new Date().toISOString() }).eq("handle", founder.handle).then(() => {});
     beat();
     const id = setInterval(beat, 60_000);
     return () => clearInterval(id);
@@ -43,7 +43,7 @@ export function SessionProvider({ children }: { children: ReactNode }) {
     return true;
   };
   const logout = async () => {
-    if (founder) await supabase.from("founder_status").update({ is_online: false }).eq("handle", founder.handle);
+    if (founder) await supabase.from("founder_status").update({ is_online: false }).eq("handle", founder.handle).then(() => {});
     localStorage.removeItem(KEY);
     setFounder(null);
   };
