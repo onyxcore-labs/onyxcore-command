@@ -14,6 +14,24 @@ export type Database = {
   }
   public: {
     Tables: {
+      founder_credentials: {
+        Row: {
+          handle: string
+          passcode_hash: string
+          updated_at: string
+        }
+        Insert: {
+          handle: string
+          passcode_hash: string
+          updated_at?: string
+        }
+        Update: {
+          handle?: string
+          passcode_hash?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       founder_status: {
         Row: {
           blocker: string | null
@@ -82,6 +100,7 @@ export type Database = {
       }
       project_ideas: {
         Row: {
+          category: string
           created_at: string
           description: string
           id: string
@@ -92,6 +111,7 @@ export type Database = {
           verdict: string
         }
         Insert: {
+          category?: string
           created_at?: string
           description?: string
           id?: string
@@ -102,6 +122,7 @@ export type Database = {
           verdict?: string
         }
         Update: {
+          category?: string
           created_at?: string
           description?: string
           id?: string
@@ -110,6 +131,27 @@ export type Database = {
           title?: string
           upvotes?: number
           verdict?: string
+        }
+        Relationships: []
+      }
+      security_audit: {
+        Row: {
+          action: string
+          created_at: string
+          handle: string
+          id: string
+        }
+        Insert: {
+          action: string
+          created_at?: string
+          handle: string
+          id?: string
+        }
+        Update: {
+          action?: string
+          created_at?: string
+          handle?: string
+          id?: string
         }
         Relationships: []
       }
