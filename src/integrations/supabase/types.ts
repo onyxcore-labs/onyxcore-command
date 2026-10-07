@@ -14,7 +14,132 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      founder_status: {
+        Row: {
+          blocker: string | null
+          current_task: string
+          full_name: string
+          handle: string
+          is_online: boolean
+          last_active: string
+          progress_pct: number
+          role: string
+        }
+        Insert: {
+          blocker?: string | null
+          current_task?: string
+          full_name: string
+          handle: string
+          is_online?: boolean
+          last_active?: string
+          progress_pct?: number
+          role: string
+        }
+        Update: {
+          blocker?: string | null
+          current_task?: string
+          full_name?: string
+          handle?: string
+          is_online?: boolean
+          last_active?: string
+          progress_pct?: number
+          role?: string
+        }
+        Relationships: []
+      }
+      hardware_inventory: {
+        Row: {
+          assigned_to: string | null
+          category: string
+          created_at: string
+          id: string
+          part_name: string
+          quantity_available: number
+          specs: string
+          status: string
+        }
+        Insert: {
+          assigned_to?: string | null
+          category: string
+          created_at?: string
+          id?: string
+          part_name: string
+          quantity_available?: number
+          specs?: string
+          status?: string
+        }
+        Update: {
+          assigned_to?: string | null
+          category?: string
+          created_at?: string
+          id?: string
+          part_name?: string
+          quantity_available?: number
+          specs?: string
+          status?: string
+        }
+        Relationships: []
+      }
+      project_ideas: {
+        Row: {
+          created_at: string
+          description: string
+          id: string
+          source_url: string
+          submitted_by: string
+          title: string
+          upvotes: number
+          verdict: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string
+          id?: string
+          source_url?: string
+          submitted_by: string
+          title: string
+          upvotes?: number
+          verdict?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          id?: string
+          source_url?: string
+          submitted_by?: string
+          title?: string
+          upvotes?: number
+          verdict?: string
+        }
+        Relationships: []
+      }
+      squad_messages: {
+        Row: {
+          channel: string
+          content: string
+          created_at: string
+          id: string
+          sender_handle: string
+          sender_name: string
+        }
+        Insert: {
+          channel?: string
+          content: string
+          created_at?: string
+          id?: string
+          sender_handle: string
+          sender_name: string
+        }
+        Update: {
+          channel?: string
+          content?: string
+          created_at?: string
+          id?: string
+          sender_handle?: string
+          sender_name?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
