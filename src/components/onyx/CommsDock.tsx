@@ -66,7 +66,7 @@ function Comms({ channel, setChannel, draft, setDraft }: { channel: string; setC
     return () => { alive = false; supabase.removeChannel(ch); };
   }, [channel]);
 
-  useEffect(() => end.current?.scrollIntoView({ behavior: "smooth" }), [msgs]);
+  useEffect(() => { end.current?.scrollIntoView({ behavior: "smooth" }); }, [msgs]);
 
   async function send() {
     const content = draft.trim();
@@ -110,7 +110,7 @@ function Advisor() {
   const [draft, setDraft] = useState("");
   const [busy, setBusy] = useState(false);
   const end = useRef<HTMLDivElement>(null);
-  useEffect(() => end.current?.scrollIntoView({ behavior: "smooth" }), [msgs, busy]);
+  useEffect(() => { end.current?.scrollIntoView({ behavior: "smooth" }); }, [msgs, busy]);
 
   async function send() {
     const content = draft.trim();
