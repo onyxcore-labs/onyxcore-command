@@ -32,9 +32,36 @@ export type Database = {
         }
         Relationships: []
       }
+      founder_sessions: {
+        Row: {
+          expires_at: string
+          handle: string
+          token_hash: string
+        }
+        Insert: {
+          expires_at?: string
+          handle: string
+          token_hash: string
+        }
+        Update: {
+          expires_at?: string
+          handle?: string
+          token_hash?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "founder_sessions_handle_fkey"
+            columns: ["handle"]
+            isOneToOne: false
+            referencedRelation: "founder_credentials"
+            referencedColumns: ["handle"]
+          },
+        ]
+      }
       founder_status: {
         Row: {
           blocker: string | null
+          completed_milestones: Json
           current_task: string
           full_name: string
           handle: string
@@ -45,6 +72,7 @@ export type Database = {
         }
         Insert: {
           blocker?: string | null
+          completed_milestones?: Json
           current_task?: string
           full_name: string
           handle: string
@@ -55,6 +83,7 @@ export type Database = {
         }
         Update: {
           blocker?: string | null
+          completed_milestones?: Json
           current_task?: string
           full_name?: string
           handle?: string
@@ -187,7 +216,16 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      founder_change_passcode: {
+        Args: { p_current: string; p_new: string; p_token: string }
+        Returns: undefined
+      }
+      founder_login: {
+        Args: { p_handle: string; p_passcode: string }
+        Returns: string
+      }
+      founder_logout: { Args: { p_token: string }; Returns: undefined }
+      founder_session_handle: { Args: { p_token: string }; Returns: string }
     }
     Enums: {
       [_ in never]: never
