@@ -25,7 +25,7 @@ export function SquadSync() {
         title="Live Blocker Board"
         action={<Btn onClick={() => setOpen(true)}>Update My Status</Btn>}
       />
-      <div className="panel mb-4 flex items-center gap-3 px-4 py-3">
+      <div className="mb-6 flex flex-wrap items-center gap-3 border-b px-1 py-3">
         <span className="h-2 w-2 rounded-full dot-online" />
         <span className="font-mono text-xs font-semibold text-chassis">
           {online.length}/4 ONLINE
@@ -34,7 +34,7 @@ export function SquadSync() {
           ({online.map((r) => FOUNDERS.find((f) => f.handle === r.handle)?.first).join(", ") || "nobody"})
         </span>
       </div>
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <div className="grid gap-4 md:grid-cols-2 2xl:grid-cols-4">
         {ordered.map((r) => {
           const on = isOnline(r);
           return (

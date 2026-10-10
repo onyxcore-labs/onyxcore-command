@@ -9,8 +9,8 @@ export function Pill({ tone = "muted", children }: { tone?: "ok" | "warn" | "ale
   }[tone];
   const dot = { ok: "dot-online", warn: "dot-gold", alert: "dot-alert", muted: "bg-muted-foreground/50" }[tone];
   return (
-    <span className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 font-mono text-[10px] font-semibold uppercase tracking-wide ${styles}`}>
-      <span className={`h-1.5 w-1.5 rounded-full ${dot}`} />
+    <span className={`inline-flex max-w-full items-center gap-1.5 break-words rounded-full px-2.5 py-1 font-mono text-[10px] font-semibold uppercase tracking-wide ${styles}`}>
+      <span className={`h-1.5 w-1.5 shrink-0 rounded-full ${dot}`} />
       {children}
     </span>
   );
@@ -18,7 +18,7 @@ export function Pill({ tone = "muted", children }: { tone?: "ok" | "warn" | "ale
 
 export function SectionHead({ tag, title, action }: { tag: string; title: string; action?: ReactNode }) {
   return (
-    <div className="mb-4 flex items-end justify-between gap-4">
+    <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
       <div>
         <div className="font-mono text-[10px] tracking-[0.25em] text-gold">{tag}</div>
         <h2 className="text-xl font-bold tracking-tight text-chassis">{title}</h2>
@@ -42,7 +42,7 @@ export function Modal({ open, onClose, title, children }: { open: boolean; onClo
   if (!open) return null;
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-chassis/40 p-4 backdrop-blur-sm" onClick={onClose}>
-      <div className="glass w-full max-w-md rounded-2xl p-6 shadow-2xl" onClick={(e) => e.stopPropagation()}>
+      <div role="dialog" aria-modal="true" aria-label={title} className="glass max-h-[90dvh] w-full max-w-md overflow-y-auto rounded-xl p-6 shadow-2xl" onClick={(e) => e.stopPropagation()}>
         <h3 className="mb-4 text-lg font-bold text-chassis">{title}</h3>
         {children}
       </div>
