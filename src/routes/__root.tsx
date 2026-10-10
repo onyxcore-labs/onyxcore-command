@@ -12,6 +12,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { CommandShell } from '@/components/onyx/CommandShell';
 
 function NotFoundComponent() {
   return (
@@ -116,7 +117,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <CommandShell><Outlet /></CommandShell>
     </QueryClientProvider>
   );
 }

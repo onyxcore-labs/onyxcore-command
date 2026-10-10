@@ -9,6 +9,9 @@ describe("founder gate", () => {
   it("rejects unknown handles", () => {
     expect(findFounder("smith")).toBeUndefined();
   });
+  it.each([['ghambuna', 'Maximilian Ghambuna'], ['shamba', 'Brian Shamba'], ['maganga', 'Aidan Maganga'], ['mchele', 'Blessing Mchele']])('resolves the accepted founder %s', (handle, name) => {
+    expect(findFounder(handle)?.name).toBe(name);
+  });
 });
 
 describe("online heartbeat", () => {

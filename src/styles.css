@@ -127,3 +127,18 @@
 .prose-onyx pre code { background: transparent; padding: 0; color: inherit; }
 .prose-onyx a { color: var(--primary); text-decoration: underline; }
 .prose-onyx .katex-display { overflow-x: auto; overflow-y: hidden; }
+
+.workspace { --sidebar-width: 240px; }
+.sidebar-collapsed { --sidebar-width: 64px; }
+.command-sidebar { width: var(--sidebar-width); box-shadow: var(--sidebar-shadow); transition: width 180ms ease; overflow-y: auto; }
+.command-content { margin-left: var(--sidebar-width); transition: margin-left 180ms ease; min-width: 0; }
+:root { --sidebar-shadow: 1px 0 4px oklch(0.208 0.042 265.76 / 4%); }
+@media (max-width: 760px) {
+  .command-content { margin-left: 64px; }
+  .command-content header { padding-inline: 12px; }
+  .command-content main { padding-inline: 16px; }
+  .command-content header > div:first-child > div:first-child { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}

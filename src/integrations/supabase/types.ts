@@ -226,6 +226,7 @@ export type Database = {
       }
       founder_logout: { Args: { p_token: string }; Returns: undefined }
       founder_session_handle: { Args: { p_token: string }; Returns: string }
+      upvote_project_idea: { Args: { p_id: string }; Returns: undefined }
     }
     Enums: {
       [_ in never]: never
