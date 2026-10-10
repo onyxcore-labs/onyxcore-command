@@ -14,3 +14,4 @@
 - The root CommandShell owns session, sidebar, security dialog and comms drawer while leaf routes render individual modules — why: module navigation must preserve founder and communications state.
 - Existing team-data anon policies remain a lightweight shared-workspace model, not account-level security — why: preserve the requested founder gate without silently changing existing data permissions.
 - Objective milestone templates and URL/progress helpers live in browser-safe domain modules — why: concrete rules can be tested independently of rendering.
+- Idea upvotes use an atomic invoker-rights database function — why: concurrent votes must increment rather than overwrite each other while preserving table access policies.
