@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { toast } from 'sonner';
+import { Trash2 } from 'lucide-react';
 import { supabase } from "@/integrations/supabase/client";
 import { CATEGORIES, FOUNDERS } from "@/lib/founders";
 import { useLiveTable } from "./useLiveTable";

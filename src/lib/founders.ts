@@ -14,7 +14,7 @@ export function findFounder(input: string): Founder | undefined {
 
 export const CHANNELS = ["all-hands", "firmware-hw", "frontend-ui", "client-ops", "backend-data"] as const;
 
-export const CATEGORIES = ["Microcontroller", "Sensor", "Radio / Wireless", "Power", "Display & Interface", "Debugger"] as const;
+export const CATEGORIES = ["Microcontroller", "Sensor", "Radio / Wireless", "Power", "Display & Interface", "Debugger", "Actuators"] as const;
 
 export const VERDICTS = ["Under Discussion", "Approved for Sprint", "Passed / Archived"] as const;
 
