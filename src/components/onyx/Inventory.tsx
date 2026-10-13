@@ -23,7 +23,21 @@ export function Inventory() {
       <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
         {list.map((r) => (
           <div key={r.id} className="panel p-4">
-            <div className="font-mono text-[10px] uppercase tracking-wider text-gold">{r.category}</div>
+            <div className="flex items-start justify-between gap-2">
+              <div className="font-mono text-[10px] uppercase tracking-wider text-gold">{r.category}</div>
+              <button
+                type="button"
+                aria-label={`Delete ${r.part_name}`}
+                title={`Delete ${r.part_name}`}
+                className="rounded-md p-1 text-muted-foreground transition-colors hover:bg-destructive-soft hover:text-destructive"
+                onClick={async () => {
+                  const { error } = await supabase.from('hardware_inventory').delete().eq('id', r.id);
+                  if (error) toast.error('Unable to delete component'); else await reload();
+                }}
+              >
+                <Trash2 className="h-3.5 w-3.5" />
+              </button>
+            </div>
             <div className="mt-1 font-bold leading-tight text-chassis">{r.part_name}</div>
             <div className="mt-2 text-xs text-muted-foreground">{r.specs}</div>
             <div className="mt-3 flex items-center justify-between">
