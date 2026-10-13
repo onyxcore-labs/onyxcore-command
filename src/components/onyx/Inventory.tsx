@@ -10,7 +10,9 @@ export function Inventory() {
   const { rows, reload } = useLiveTable("hardware_inventory", "created_at");
   const [cat, setCat] = useState<string>("All");
   const [open, setOpen] = useState(false);
-  const list = cat === "All" ? rows : rows.filter((r) => r.category === cat);
+  const [removed, setRemoved] = useState<Set<string>>(new Set());
+  const visible = rows.filter((r) => !removed.has(r.id));
+  const list = cat === "All" ? visible : visible.filter((r) => r.category === cat);
 
   return (
     <section>
@@ -29,13 +31,17 @@ export function Inventory() {
                 type="button"
                 aria-label={`Delete ${r.part_name}`}
                 title={`Delete ${r.part_name}`}
-                className="rounded-md p-1 text-muted-foreground transition-colors hover:bg-destructive-soft hover:text-destructive"
+                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-destructive/40 bg-destructive/10 text-destructive transition-colors hover:bg-destructive hover:text-destructive-foreground"
                 onClick={async () => {
+                  setRemoved((s) => new Set(s).add(r.id));
                   const { error } = await supabase.from('hardware_inventory').delete().eq('id', r.id);
-                  if (error) toast.error('Unable to delete component'); else await reload();
+                  if (error) {
+                    setRemoved((s) => { const n = new Set(s); n.delete(r.id); return n; });
+                    toast.error('Unable to delete component');
+                  } else { toast.success(`${r.part_name} removed`); await reload(); }
                 }}
               >
-                <Trash2 className="h-3.5 w-3.5" />
+                <Trash2 className="h-4 w-4" />
               </button>
             </div>
             <div className="mt-1 font-bold leading-tight text-chassis">{r.part_name}</div>
