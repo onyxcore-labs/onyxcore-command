@@ -8,4 +8,4 @@
 # Inventory update (Oct 13)
 - [x] Delete button on hardware cards
 - [x] Replace test rows with real component list; add Actuators category
-- [ ] Browser check of hardware tab
+- [x] Browser check of hardware tab
