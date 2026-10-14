@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { ArrowUp, ExternalLink, MessageSquare, Plus, Link2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { supabase } from '@/integrations/supabase/client';
-import { FOUNDERS, VERDICTS } from '@/lib/founders';
+import { VERDICTS } from '@/lib/founders';
+import { useTeam } from './useTeam';
 import { safeLink, youtubeId } from '@/lib/objectives';
 import { useSession } from './session';
 import { useLiveTable } from './useLiveTable';
@@ -36,7 +37,7 @@ export function Radar() {
   return <section>
     <SectionHead tag="MODULE 03 / DISCOVERY & CONSENSUS" title="Social Radar & Ideas" action={<Btn onClick={() => setOpen(true)}><Plus size={15} /> Share Opportunity / Idea</Btn>} />
     <div className="grid items-start gap-5 xl:grid-cols-2">{rows.map((r) => <article key={r.id} className="panel min-w-0 overflow-hidden">
-      <div className="p-5"><div className="mb-4 flex flex-wrap items-center gap-2 text-xs text-muted-foreground"><span className="font-semibold text-chassis">{FOUNDERS.find((x) => x.handle === r.submitted_by)?.name ?? r.submitted_by}</span><span>·</span><time dateTime={r.created_at}>{new Date(r.created_at).toLocaleDateString('en-GB', { month: 'short', day: 'numeric' })}</time><span className="ml-auto rounded-md bg-gold-soft px-2 py-1 font-mono text-[10px] text-gold">{r.category}</span></div><h2 className="break-words text-lg font-bold text-chassis">{r.title}</h2><p className="mt-2 whitespace-pre-wrap break-words text-sm leading-relaxed text-muted-foreground">{r.description}</p></div>
+      <div className="p-5"><div className="mb-4 flex flex-wrap items-center gap-2 text-xs text-muted-foreground"><span className="font-semibold text-chassis">{team.find((x) => x.handle === r.submitted_by)?.name ?? r.submitted_by}</span><span>·</span><time dateTime={r.created_at}>{new Date(r.created_at).toLocaleDateString('en-GB', { month: 'short', day: 'numeric' })}</time><span className="ml-auto rounded-md bg-gold-soft px-2 py-1 font-mono text-[10px] text-gold">{r.category}</span></div><h2 className="break-words text-lg font-bold text-chassis">{r.title}</h2><p className="mt-2 whitespace-pre-wrap break-words text-sm leading-relaxed text-muted-foreground">{r.description}</p></div>
       {r.source_url && <SourcePreview url={r.source_url} title={r.title} />}
       <div className="p-5"><div className="flex flex-wrap gap-2">{VERDICTS.map((v) => <Btn key={v} variant="ghost" aria-pressed={r.verdict === v} onClick={() => void vote(r.id, v)} className={`px-2.5 py-1.5 text-[11px] ${r.verdict === v ? v === 'Approved for Sprint' ? 'border-primary bg-primary-soft text-accent-foreground' : v === 'Passed / Archived' ? 'border-chassis-2 bg-chassis-2 text-primary-foreground' : 'border-gold bg-gold-soft text-gold' : ''}`}>{v}</Btn>)}</div><div className="mt-5 flex items-center justify-between border-t pt-4"><Btn variant="ghost" aria-label={`Upvote ${r.title}`} onClick={() => void upvote(r.id)} className="gap-2 px-3 py-1.5 text-xs"><ArrowUp size={14} /><span>{r.upvotes}</span><span className="text-muted-foreground">+1</span></Btn><Btn variant="ghost" onClick={() => openChat(`Re: **${r.title}** — `)} className="border-0 px-2 text-xs text-gold"><MessageSquare size={14} />Discuss in Comms</Btn></div></div>
     </article>)}</div>

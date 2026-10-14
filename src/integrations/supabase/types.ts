@@ -127,6 +127,45 @@ export type Database = {
         }
         Relationships: []
       }
+      member_applications: {
+        Row: {
+          auth_user_id: string
+          created_at: string
+          decided_by: string | null
+          email: string
+          full_name: string
+          handle: string
+          id: string
+          passcode_hash: string
+          role: string
+          status: string
+        }
+        Insert: {
+          auth_user_id: string
+          created_at?: string
+          decided_by?: string | null
+          email: string
+          full_name: string
+          handle: string
+          id?: string
+          passcode_hash: string
+          role: string
+          status?: string
+        }
+        Update: {
+          auth_user_id?: string
+          created_at?: string
+          decided_by?: string | null
+          email?: string
+          full_name?: string
+          handle?: string
+          id?: string
+          passcode_hash?: string
+          role?: string
+          status?: string
+        }
+        Relationships: []
+      }
       project_ideas: {
         Row: {
           category: string
@@ -226,6 +265,33 @@ export type Database = {
       }
       founder_logout: { Args: { p_token: string }; Returns: undefined }
       founder_session_handle: { Args: { p_token: string }; Returns: string }
+      member_apply: {
+        Args: {
+          p_email: string
+          p_handle: string
+          p_name: string
+          p_passcode: string
+          p_role: string
+          p_user_id: string
+        }
+        Returns: undefined
+      }
+      member_decide: {
+        Args: { p_approve: boolean; p_id: string; p_token: string }
+        Returns: undefined
+      }
+      member_pending: {
+        Args: { p_token: string }
+        Returns: {
+          created_at: string
+          email: string
+          full_name: string
+          handle: string
+          id: string
+          role: string
+          verified: boolean
+        }[]
+      }
       upvote_project_idea: { Args: { p_id: string }; Returns: undefined }
     }
     Enums: {
