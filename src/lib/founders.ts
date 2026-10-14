@@ -5,9 +5,15 @@ export const FOUNDERS = [
   { handle: "mchele", first: "Blessing", name: "Blessing Mchele", role: "Backend & Data Pipelines" },
 ] as const;
 
-export type Founder = (typeof FOUNDERS)[number];
+export type Founder = { handle: string; first: string; name: string; role: string };
+
+/** Builds a team member from a live status row. */
+export function memberFromRow(row: { handle: string; full_name: string; role: string }): Founder {
+  return { handle: row.handle, first: row.full_name.trim().split(/\s+/)[0] || row.handle, name: row.full_name, role: row.role };
+}
 
 export function findFounder(input: string): Founder | undefined {
+  // Seed founders only; the live team list is founder_status.
   const h = input.trim().toLowerCase();
   return FOUNDERS.find((f) => f.handle === h);
 }
