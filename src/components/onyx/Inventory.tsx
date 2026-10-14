@@ -2,12 +2,14 @@ import { useState } from "react";
 import { toast } from 'sonner';
 import { Trash2 } from 'lucide-react';
 import { supabase } from "@/integrations/supabase/client";
-import { CATEGORIES, FOUNDERS } from "@/lib/founders";
+import { CATEGORIES } from "@/lib/founders";
+import { useTeam } from "./useTeam";
 import { useLiveTable } from "./useLiveTable";
 import { Btn, Field, Modal, Pill, SectionHead, inputCls } from "./ui";
 
 export function Inventory() {
   const { rows, reload } = useLiveTable("hardware_inventory", "created_at");
+  const { team } = useTeam();
   const [cat, setCat] = useState<string>("All");
   const [open, setOpen] = useState(false);
   const [removed, setRemoved] = useState<Set<string>>(new Set());
@@ -54,7 +56,7 @@ export function Inventory() {
               const assigned_to = e.target.value || null;
               const { error } = await supabase.from('hardware_inventory').update({ assigned_to, status: r.quantity_available === 0 ? 'Depleted' : assigned_to ? 'Assigned' : 'In Stock' }).eq('id', r.id);
               if (error) toast.error('Unable to update assignment'); else await reload();
-            }}><option value="">Unassigned</option>{FOUNDERS.map((f) => <option key={f.handle} value={f.handle}>{f.name}</option>)}</select></Field>
+            }}><option value="">Unassigned</option>{team.map((f) => <option key={f.handle} value={f.handle}>{f.name}</option>)}</select></Field>
           </div>
         ))}
         {list.length === 0 && <p className="text-sm text-muted-foreground">No parts in this category.</p>}
@@ -65,6 +67,7 @@ export function Inventory() {
 }
 
 function RegisterModal({ open, onClose }: { open: boolean; onClose: () => void }) {
+  const { team } = useTeam();
   const [f, setF] = useState({ part_name: "", category: CATEGORIES[0] as string, quantity_available: 1, specs: "", assigned_to: "" });
   async function save() {
     if (!f.part_name.trim()) return;
@@ -89,7 +92,7 @@ function RegisterModal({ open, onClose }: { open: boolean; onClose: () => void }
       <Field label="Specs"><input className={inputCls} value={f.specs} onChange={(e) => setF({ ...f, specs: e.target.value })} /></Field>
       <Field label="Assign to">
         <select className={inputCls} value={f.assigned_to} onChange={(e) => setF({ ...f, assigned_to: e.target.value })}>
-          <option value="">Unassigned</option>{FOUNDERS.map((x) => <option key={x.handle} value={x.handle}>{x.name}</option>)}
+          <option value="">Unassigned</option>{team.map((x) => <option key={x.handle} value={x.handle}>{x.name}</option>)}
         </select>
       </Field>
       <div className="mt-4 flex justify-end gap-2"><Btn variant="ghost" onClick={onClose}>Cancel</Btn><Btn onClick={save}>Register</Btn></div>

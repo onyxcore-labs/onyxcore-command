@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { FOUNDERS, isOnline } from "@/lib/founders";
+import { isOnline, memberFromRow } from "@/lib/founders";
+import { PendingMembers } from "./PendingMembers";
 import { useSession } from "./session";
 import { useLiveTable } from "./useLiveTable";
 import { Btn, Field, Modal, Pill, SectionHead, inputCls } from "./ui";
@@ -14,7 +15,7 @@ export function SquadSync() {
     return () => clearInterval(id);
   }, []);
   const [open, setOpen] = useState(false);
-  const ordered = FOUNDERS.map((f) => rows.find((r) => r.handle === f.handle)).filter(Boolean) as typeof rows;
+  const ordered = rows;
   const online = ordered.filter((r) => isOnline(r));
   const me = rows.find((r) => r.handle === founder?.handle);
 
@@ -25,13 +26,14 @@ export function SquadSync() {
         title="Live Blocker Board"
         action={<Btn onClick={() => setOpen(true)}>Update My Status</Btn>}
       />
+      <PendingMembers />
       <div className="mb-6 flex flex-wrap items-center gap-3 border-b px-1 py-3">
         <span className="h-2 w-2 rounded-full dot-online" />
         <span className="font-mono text-xs font-semibold text-chassis">
-          {online.length}/4 ONLINE
+          {online.length}/{ordered.length} ONLINE
         </span>
         <span className="text-sm text-muted-foreground">
-          ({online.map((r) => FOUNDERS.find((f) => f.handle === r.handle)?.first).join(", ") || "nobody"})
+          ({online.map((r) => memberFromRow(r).first).join(", ") || "nobody"})
         </span>
       </div>
       <div className="grid gap-4 md:grid-cols-2 2xl:grid-cols-4">
