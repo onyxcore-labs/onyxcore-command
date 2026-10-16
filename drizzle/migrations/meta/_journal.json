@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1791438650850,
+      "tag": "0000_founder_sessions_and_objectives",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1791625548087,
+      "tag": "0001_atomic_idea_upvotes",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1791975912216,
+      "tag": "0002_member_applications",
+      "breakpoints": true
+    }
+  ]
+}

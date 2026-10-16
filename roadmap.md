@@ -1,6 +1,11 @@
-# Repairs
-- [ ] Restore working preview and Cloud connection.
-- [ ] Restore verified founder login, security settings and live team membership approvals.
-- [ ] Restore five modules, inventory deletion and shared communications.
-- [ ] Verify browser flows and rule tests.
-- [ ] Email approvals and inbox: blocked until mail sending and account connectors are configured.
+# Command center refactor
+- [ ] Founder verification, session and security settings
+- [ ] Sidebar and five module routes
+- [ ] Personalized objectives and team live status
+- [ ] Radar previews and inventory assignment
+- [ ] Verify cross-tab comms, tests and screen layout
+
+# Inventory update (Oct 13)
+- [x] Delete button on hardware cards
+- [x] Replace test rows with real component list; add Actuators category
+- [x] Browser check of hardware tab
