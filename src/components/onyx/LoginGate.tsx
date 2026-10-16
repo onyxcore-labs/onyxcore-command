@@ -71,7 +71,7 @@ function JoinForm({ onBack, onSent }: { onBack: () => void; onSent: () => void }
     <div className="mb-2 flex items-center gap-2 text-primary"><UserPlus size={16} /><span className="font-mono text-xs">REQUEST TO JOIN</span></div>
     <h1 className="mb-5 text-2xl font-bold text-chassis">Join the squad.</h1>
     <Field label="Full name"><input required maxLength={80} className={inputCls} value={f.name} onChange={set('name')} /></Field>
-    <Field label="Handle (used to sign in)"><input required maxLength={24} pattern="[a-z][a-z0-9_]{2,23}" title="Starts with a lowercase letter, then lowercase letters, numbers or underscores. 3 to 24 characters." placeholder="e.g. blessingm" className={inputCls} value={f.handle} onChange={(e) => setF({ ...f, handle: e.target.value.toLowerCase() })} /></Field>
+    <Field label="Handle (used to sign in)"><input required maxLength={24} pattern="[a-z][a-z0-9_]{2,23}" title="Starts with a lowercase letter, then lowercase letters, numbers or underscores. 3 to 24 characters. No spaces." placeholder="e.g. blessingm" className={inputCls} value={f.handle} onChange={(e) => setF({ ...f, handle: e.target.value.toLowerCase().replace(/\s+/g, "") })} /></Field>
     <Field label="Role"><input required maxLength={80} placeholder="e.g. Embedded Engineer" className={inputCls} value={f.role} onChange={set('role')} /></Field>
     <Field label="Email"><input required type="email" maxLength={255} className={inputCls} value={f.email} onChange={set('email')} /></Field>
     <Field label="Passcode"><input required type="password" autoComplete="new-password" minLength={6} maxLength={128} className={inputCls} value={f.passcode} onChange={set('passcode')} /></Field>
