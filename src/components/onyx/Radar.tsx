@@ -13,6 +13,7 @@ const empty = { title: '', description: '', source_url: '', category: categories
 export function Radar() {
   const { founder, openChat } = useSession();
   const { rows, reload } = useLiveTable('project_ideas', 'created_at', false);
+  const { team } = useTeam();
   const [open, setOpen] = useState(false);
   const [f, setF] = useState(empty);
   const [busy, setBusy] = useState(false);
